@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <locale.h>
 #include <string.h>
 #include <ctype.h>
@@ -19,6 +20,8 @@ void askMenu(){
             countDNA();
         case 2:
             becomeRNA();
+        case 3:
+            reverseDNA();
         default:
             system("cls");
             system("clear");
@@ -29,11 +32,12 @@ void askMenu(){
 
 void menu(){
     printf("1. Count DNA\n"
-            "2. Become RNA\n");
+            "2. Become RNA\n"
+            "3. Reverse DNA\n");
     askMenu();
 }
 
-void countDNA(){
+int countDNA(){
     int i, count[4] = {0};
     char dna[MAX_NUMBER];
     char yn;
@@ -75,10 +79,10 @@ void countDNA(){
         system("clear");
         menu();
     }else if(yn == 'n' || yn == 'N')
-        stop();
+        return 0;
 }
 
-void becomeRNA(){
+int becomeRNA(){
     int i;
     char rna[MAX_NUMBER];
     char yn;
@@ -111,7 +115,51 @@ void becomeRNA(){
         system("clear");
         menu();
     }else if(yn == 'n' || yn == 'N')
-        stop();
+        return 0;
+}
+
+int reverseDNA(){
+    int i;
+    char reverseDNA[MAX_NUMBER], ANDesrever[MAX_NUMBER];
+    char yn;
+
+    system("cls");
+    system("clear");
+
+    printf("Type your DNA strand: ");
+    fgets(reverseDNA, MAX_NUMBER, stdin);
+    for(i = 0; reverseDNA[i]; i++){
+        if(reverseDNA[i] == '\n')
+            reverseDNA[i] == '\0';
+    }
+
+    for(i = 0; reverseDNA[i]; i++){
+        reverseDNA[i] = toupper(reverseDNA[i]);
+    }
+
+    for(i = 0; reverseDNA[i]; i++){
+        if(reverseDNA[i] == 'A') reverseDNA[i] = 'T';
+        else if(reverseDNA[i] == 'T') reverseDNA[i] = 'A';
+        else if(reverseDNA[i] == 'C') reverseDNA[i] = 'G';
+        else if(reverseDNA[i] == 'G') reverseDNA[i] = 'C';
+    }
+
+    int j = strlen(reverseDNA)-1;
+    for(i = 0; i < strlen(reverseDNA); i++){
+        ANDesrever[i] = reverseDNA[j];
+        j--;
+    }
+
+    printf("%s\n", ANDesrever);
+
+    printf("\nDo you want to go back to menu? (y/n):");
+    scanf("%c%*c", &yn);
+    if(yn == 'y' || yn == 'Y'){
+        system("cls");
+        system("clear");
+        menu();
+    }else if(yn == 'n' || yn == 'N')
+        return 0;
 }
 
 int main(){
