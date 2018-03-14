@@ -4,6 +4,10 @@
 #include <ctype.h>
 #define MAX_NUMBER 1000
 
+int stop(){
+    return 0;
+}
+
 void askMenu(){
     int op;
 
@@ -18,7 +22,7 @@ void askMenu(){
         default:
             system("cls");
             system("clear");
-            printf("OPÇÃO INVALIDA\n\n");
+            printf("OPÇÃO INVÁLIDA\n\n");
             menu();
     }
 }
@@ -41,7 +45,7 @@ void countDNA(){
     fgets(dna, MAX_NUMBER, stdin);
     for(i = 0; i < strlen(dna)-1; i++){
         if(dna[i] == '\n')
-            dna[i] == '\o';
+            dna[i] == '\0';
     }
 
     for(i = 0; dna[i]; i++){
@@ -71,8 +75,7 @@ void countDNA(){
         system("clear");
         menu();
     }else if(yn == 'n' || yn == 'N')
-        return 1;
-
+        stop();
 }
 
 void becomeRNA(){
@@ -87,7 +90,7 @@ void becomeRNA(){
     fgets(rna, MAX_NUMBER, stdin);
     for(i = 0; rna[i]; i++){
         if(rna[i] == '\n')
-            rna[i] == '\o';
+            rna[i] == '\0';
     }
 
     for(i = 0; rna[i]; i++){
@@ -108,7 +111,7 @@ void becomeRNA(){
         system("clear");
         menu();
     }else if(yn == 'n' || yn == 'N')
-        return 2;
+        stop();
 }
 
 int main(){
